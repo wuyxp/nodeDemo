@@ -6,17 +6,15 @@ var uglify = function(str,key){
     var key_length = key.length;
     var min_code = 32;
     var max_code = 126;
-    var getKeyCode = (function(){
+    var getKeyCode = function(){
         var key_code = key.charCodeAt(key_index);
-        if(key_code >= key_length){
+        if(key_index >= (key_length-1)){
             key_index = 0;
         }else{
-            key_code++;
+            key_index++;
         }
-        return function(){
-            return key_code
-        }
-    })();
+        return key_code
+    };
     var toDown = function(){
         var newStr = [];
         for(var i=0;i<str.length;i++){
