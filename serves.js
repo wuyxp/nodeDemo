@@ -7,37 +7,9 @@ const fs = require("fs");
 
 var mock = require("./mock");
 
-http.createServer(function(req,res){
-
-    // console.log(mock.nets);
-    // console.log(mock.hosts);
+http.createServer(function(req,response){
     console.log('有人来了:'+req.url);
-        var url = '../topology/ch07';
-     // if(req.url == '/index'){
-        fs.readFile('../topology/ch07/index.html','utf-8',function(err,data){
-            if(err){
-                console.log(err);
-                res.end('404');
-            }else{
-                console.log(data);
-                res.write(data);
-                res.end('111');
-            }
-
-        });
-/*
-         fs.readFile(url+req.url,function(err,data){
-             if(err){
-                 res.end('404');  //?
-             }else{
-                 res.writeHead(200 , {"Content-Type" : "text/html"});
-                 res.end(data);
-             }
-         });
-         */
-     // }
-
-
-
-
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Hello World\n');
 }).listen(8082)
+console.log('http://localhost:8082/');

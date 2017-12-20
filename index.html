@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head charset="UTF-8">
+    <title>origin </title>
+    <style>
+    </style>
+    <script>
+      window.onload = () => {
+				window.onmessage = function(e){
+console.log(e);
+					document.getElementById('origin').innerHTML = e.data
+					window.parent.postMessage('123....','*')
+				}
+      }
+    </script>
+  </head>
+  <body>
+<div id='origin'></div>
+    <input type='button' value='push index' />
+  </body>
+</html>
