@@ -1,0 +1,26 @@
+//重新实现一下JSON.stringfiy和JSON.parse方法
+let json = {
+  a:1,
+  b:2,
+  get c(){return this.__a__ || json.a},
+  set c(any){json.__a__ = any},
+  d:Symbol('123'),
+  e:undefined,
+  f:null,
+  g:'g',
+  h:false,
+  i:true,
+  j:NaN,
+  k:0,
+  l:{toJSON(){return 'tojson'}},
+  m:'0',
+  [undefined]:'n',
+  4:'o',
+  [false]:'p',
+  [true]:'q',
+  [NaN]:'r',
+  [Symbol('s')]:'s',
+  [function(t){}]:'t',
+  u:function(u){},
+  null:'v'
+}
