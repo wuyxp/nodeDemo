@@ -15,9 +15,7 @@ const fn = (total, num) => {
       arr.push(total);
       return arr;
     }else{
-      let tmp = getRandom(1, (total/num) * 2);
-      result = tmp;
-      arr.push(tmp);
+      arr.push(result = getRandom(1, (total/num) * 2));
     }
     return deep(arr, total-result, num-1);
   })(arr, total, num)
