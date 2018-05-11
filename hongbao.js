@@ -20,6 +20,7 @@ const fn = (total, num) => {
     return deep(arr, total-result, num-1);
   })(arr, total, num)
 }
+// 返回数组
 
 // 测试函数
 const test = (fn, total) => num => total === fn(total, num).reduce((r, i) => r+i, 0);
