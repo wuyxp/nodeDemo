@@ -1,0 +1,22 @@
+{
+  "name": "nodedemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Object_jia_Array.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuyxp/nodeDemo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wuyxp/nodeDemo/issues"
+  },
+  "homepage": "https://github.com/wuyxp/nodeDemo#readme",
+  "devDependencies": {
+    "eslint-plugin-react": "^7.11.1"
+  }
+}
