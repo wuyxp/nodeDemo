@@ -28,10 +28,18 @@
  }
 
  function getArrList (arr) {
-  return arrangement(arr, [], arr.length).slice(0, -1)
+   let arg = []
+    if(Array.isArray(arr)) {
+      arg = arr
+    } else {
+      arg = [...arr]
+    }
+    return arrangement(arg, [], arg.length).slice(0, -1)
  }
 
 //  console.log(getArrList(['1','2','3']))
-//  console.log(getArrList(['1','2','3', '4'])) 
+console.log(getArrList('123'))
+console.log('================================')
+console.log(getArrList(['1','2','3', '4'])) 
 //  console.log(getArrList(['1','2','3', '4', '5']))
- console.log(getArrList(Array.from({length: 10}).map((i,index) => '' + index)))
+//  console.log(getArrList(Array.from({length: 10}).map((i,index) => '' + index)))
