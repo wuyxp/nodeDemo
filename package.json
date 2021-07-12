@@ -4,7 +4,8 @@
   "description": "",
   "main": "Object_jia_Array.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/wuyxp/nodeDemo#readme",
   "devDependencies": {
-    "eslint-plugin-react": "^7.11.1"
+    "@types/jest": "^26.0.24",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
   }
 }

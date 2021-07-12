@@ -1,41 +1,33 @@
 //总共10个球，每次只能拿一个或者两个，有多少种方法拿完！
 //居然是个斐波那契数列！！！我操
-function getB(num){
+export function getB(num: number): number{
   if(num==0||num==1) return num;
   return getB(num-1)+getB(num-2);
 }
-// console.log('使用递推式 ---------------------->')
-// console.log(getB(1));
-// console.log(getB(2));
-// console.log(getB(3));
-// console.log(getB(4));
-// console.log(getB(5));
-// console.log(getB(6));
-// console.log(getB(7));
-// console.log(getB(8));
-
 
 // 使用斐波那契数列可以用上面的递推式，当然斐波那契数列也是个数列，也是有通项公式的。
 
-
-
-
-function fib(num) {
-  return parseInt((Math.pow(((1 + Math.sqrt(5)) / 2), num) - Math.pow(((1 - Math.sqrt(5)) / 2), num)) / Math.sqrt(5))
+export function fib(num: number): number {
+  return Math.round((Math.pow(((1 + Math.sqrt(5)) / 2), num) - Math.pow(((1 - Math.sqrt(5)) / 2), num)) / Math.sqrt(5))
 }
-console.log('使用通项公式 ---------------------->')
-console.log(fib(1));
-console.log(fib(2));
-console.log(fib(3));
-console.log(fib(4));
-console.log(fib(5));
-console.log(fib(6));
-console.log(fib(7));
-console.log(fib(8));
 
-console.log('前几项的和')
 
-function sumFib(n) {
+// 使用遍历模式
+
+export function fibA(num: number): number {
+
+  if (num < 3) return 1
+  let result = 1
+  let current = 1
+  for (let index = 1; index < num; index++) {
+    result = result + current
+    current = result - current
+  }
+  return current
+}
+// console.log('前几项的和')
+
+function sumFib(n: number) {
   let result = 0
   for(let i=1; i<=n; i++) {
     result += fib(i)
@@ -43,14 +35,6 @@ function sumFib(n) {
   return result
 }
 
-console.log(sumFib(1));
-console.log(sumFib(2));
-console.log(sumFib(3));
-console.log(sumFib(4));
-console.log(sumFib(5));
-console.log(sumFib(6));
-console.log(sumFib(7));
-console.log(sumFib(8));
 
 // console.log('计算大数据的递推式所使用的时间')
 // console.time('递推式----->')
