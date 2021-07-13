@@ -1,25 +1,14 @@
-export default class DynamicArray<T> implements List<T> {
+import AbstractList from "./abstractList"
+export default class DynamicArray<T> extends AbstractList<T> {
   
   private _default_length = 10
-  private _size = 0
   private _coefficient = 1.6
   private _array = new Array(this._default_length)
 
-  size(): number {
-    return this._size
-  }
-  isEmpty(): boolean {
-    return this._size === 0
-  }
-  container(element: T): boolean {
-    return this.indexOf(element) > -1
-  }
-  add(element: T): void {
-    this._ensureCapacity(this._size + 1)
-    this._array[this._size++] = element
-  }
   inset(index: number, element: T): void {
-    if (index === this._size) this.add(element)
+    if (index === this._size) {
+      this._array[this._size++] = element
+    }
     if (this._rangeCheckForAdd(index) ) {
       this._ensureCapacity(this._size + 1)
       for (let i = this._size; i > index;) {
@@ -65,7 +54,7 @@ export default class DynamicArray<T> implements List<T> {
     }
   }
   
-  private _ensureCapacity(maxLength: number): void {
+  _ensureCapacity(maxLength: number): void {
     if (maxLength > this._array.length) {
       const newArray = new Array(Math.round(this._array.length * this._coefficient))
       for (let index = 0; index < this._array.length; index++) {
@@ -75,12 +64,4 @@ export default class DynamicArray<T> implements List<T> {
     }
   }
 
-  private _rangeCheckForAdd(index: number): boolean {
-    if (index >= 0 && index < this._size) {
-      return true
-    } else {
-      console.error(`index: ${index} 应该在 [0, ${this._size}]`)
-      return false
-    }
-  }
 }
