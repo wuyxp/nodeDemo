@@ -10,14 +10,22 @@ class Node<T> {
 export default class LinkList<T> extends AbstractList<T> {
   first: Node<T> | null = null;
   inset(index: number, element: T): void {
-    const node = this._getNode(index)
-    const newNode = new Node(element)
-    if(node !== null) {
-      newNode.next = node.next
-      node.next = newNode
+    if (index === 0) {
+      const newNode = new Node(element)
+      newNode.next = this.first
+      this.first = newNode
       this._size++
+    } else {
+      const node = this._getNode(index-1)
+      const newNode = new Node(element)
+      if(node !== null) {
+        newNode.next = node.next
+        node.next = newNode
+        this._size++
+      }
     }
   }
+
   get(index: number): T | null {
     return this._getNode(index)?.element || null
   }
@@ -32,17 +40,22 @@ export default class LinkList<T> extends AbstractList<T> {
     const currentNode = node?.next
     if(node !== null) {
       node.next = currentNode?.next || null
+      this._size--
     }
     return currentNode?.element || null
   }
   indexOf(element: T): number {
     let node = this.first as Node<T>
-    let length = -1
-    while(node.next !== null && node.element === element){
-      node = node.next as Node<T>
+    let length = 0
+    while(node.next !== null){
+      if (node.element === element) {
+        return length
+      }
       length++
+      node = node.next as Node<T>
+      
     }
-    return length
+    return -1
   }
   clear(): void {
     this._size = 0
@@ -51,8 +64,9 @@ export default class LinkList<T> extends AbstractList<T> {
   _getNode (index: number) : Node<T> | null {
     if (this._rangeCheckForAdd(index) || index === this._size) {
       let node = this.first as Node<T>
-      while(index-- > 1){
+      while(index > 0){
         node = node.next as Node<T>
+        index--
       }
       return node
     } else {

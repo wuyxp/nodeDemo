@@ -26,7 +26,7 @@ abstract class AbstractList<T> implements List<T> {
     if (index >= 0 && index < this._size) {
       return true
     } else {
-      console.error(`index: ${index} 应该在 [0, ${this._size}]`)
+      console.error(`index: ${index} 应该在 [0, ${this._size})`)
       return false
     }
   }

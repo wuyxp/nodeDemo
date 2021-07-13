@@ -4,8 +4,8 @@
   "description": "",
   "main": "Object_jia_Array.js",
   "scripts": {
-    "test": "jest dynamicArray",
-    "watch": "jest dynamicArray --watch"
+    "test": "jest \/list\/",
+    "watch": "jest \/list\/ --watch"
   },
   "repository": {
     "type": "git",

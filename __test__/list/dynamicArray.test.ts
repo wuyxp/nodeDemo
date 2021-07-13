@@ -1,4 +1,4 @@
-import DynamicArray from '../src/算法/链表/dynamicArray'
+import DynamicArray from '../../src/算法/链表/dynamicArray'
 
 describe('测试动态数组相关逻辑', () => {
   let da: DynamicArray<number>
