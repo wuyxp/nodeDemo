@@ -36,13 +36,21 @@ export default class LinkList<T> extends AbstractList<T> {
     }
   }
   remove(index: number): T | null {
-    const node = this._getNode(index-1)
-    const currentNode = node?.next
-    if(node !== null) {
-      node.next = currentNode?.next || null
+    if (index === 0 ) {
+      const currentNode = this.first
+      this.first = this.first?.next || null
       this._size--
-    }
-    return currentNode?.element || null
+      return currentNode?.element || null
+    }else {
+      const node = this._getNode(index-1)
+      const currentNode = node?.next
+      if(node !== null) {
+        node.next = currentNode?.next || null
+        this._size--
+      }
+      return currentNode?.element || null
+    } 
+
   }
   indexOf(element: T): number {
     let node = this.first as Node<T>
