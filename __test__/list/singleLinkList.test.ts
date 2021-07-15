@@ -1,4 +1,4 @@
-import LinkList from '../../src/算法/链表/linkList'
+import LinkList from '../../src/算法/链表/singleLinkList'
 
 describe('测试动态数组相关逻辑', () => {
   let da: LinkList<number>
