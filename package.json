@@ -4,8 +4,10 @@
   "description": "",
   "main": "Object_jia_Array.js",
   "scripts": {
-    "test": "jest /list/",
-    "watch": "jest /list/ --watch"
+    "test:tree": "jest /tree/",
+    "watch:tree": "jest /tree/ --watch",
+    "test:list": "jest /list/",
+    "watch:list": "jest /list/ --watch"
   },
   "repository": {
     "type": "git",
