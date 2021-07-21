@@ -202,8 +202,6 @@ export default class BinarySearchTree<E> {
   public print(): void {
     if (this.root !== null) {
       let r = '总节点为: ' + this._size + '\n'
-      // console.log(this._printOrder(this.root, '-', ''));
-      
       r = r + this._printOrder(this.root, '', '')
       console.log(r);
     } else {
