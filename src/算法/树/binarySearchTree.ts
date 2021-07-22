@@ -68,7 +68,8 @@ export default class BinarySearchTree<E> {
   }
 
   public clear (): void {
-    // TODO 待定
+    this._size = 0 
+    this.root = null
   }
 
   public remove (element: E): void {
