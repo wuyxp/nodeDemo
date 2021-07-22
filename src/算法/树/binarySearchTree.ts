@@ -12,16 +12,37 @@
  */
 
 class Node<E> {
-  public left: Node<E> | null = null
-  public right: Node<E> | null = null
-  public parent: Node<E> | null = null
+  public left: nodeOfnull<E> = null
+  public right: nodeOfnull<E> = null
+  public parent: nodeOfnull<E> = null
   public element: E
-  constructor(element: E, parent: Node<E> | null) {
+  constructor(element: E, parent: nodeOfnull<E>) {
     this.element = element
     this.parent = parent
   }
+
+  public static isLeafNode<E>(node:Node<E>): boolean {
+    if (node === null) return false
+    return node.left === null && node.right === null
+  }
+
+  public static isTowDegreeNode<E>(node:Node<E>): boolean {
+    if (node === null) return false
+    return node.left !== null && node.right !== null
+  }
+
+  public static isOnlyLeftDegreeNode<E>(node:Node<E>): boolean {
+    if (node === null) return false
+    return node.left !== null && node.right === null
+  }
+
+  public static isOnlyRightDegreeNode<E>(node:Node<E>): boolean {
+    if (node === null) return false
+    return node.left === null && node.right !== null
+  }
 }
 
+type nodeOfnull<E> = Node<E> | null
 type compareFun<E> = (node1: E, node2: E) => number;
 type orderFun<E> = (element: E) => void
 
@@ -50,7 +71,56 @@ export default class BinarySearchTree<E> {
     // TODO 待定
   }
 
-  public remove (element: E): void {}
+  public remove (element: E): void {
+    let node = this.getNode(element)
+    if (node === null) return
+
+    // 度为二的节点， 需要找前驱或者后继节点来替换，然后删除前驱或者后继节点即可
+
+    if (Node.isTowDegreeNode(node)) {
+      let successor = this.succeedingNode(node)
+      if (successor !== null) {
+        node.element = successor.element
+        node = successor
+      } 
+    }
+
+    // 只有一个节点，并且是根节点，那么直接删除
+    if (node === this.root && this._size === 1) {
+      this.root = null
+      this._size = 0
+      return
+    }
+
+    // 叶子节点直接删除
+    if (Node.isLeafNode(node) && node.parent !== null) {
+      if (node.parent.left === node) {
+        node.parent.left = null
+      } else {
+        node.parent.right = null
+      }
+      return 
+    }
+
+    // 度为一的节点
+    if (Node.isOnlyLeftDegreeNode(node) || Node.isOnlyRightDegreeNode(node)) {
+      let current = (node.left ? node.left : node.right) as Node<E>
+      current.parent = node.parent
+      // 当前节点不是根节点
+      if (node.parent !== null) {
+        
+        if (node.parent.left === node) {
+          node.parent.left = current
+        } else {
+          node.parent.right = current
+        }
+      } else {
+        // 当前是根节点
+        this.root = current
+      }
+      return
+    }
+  }
 
   public add (element: E): void {
     if (this._size === 0) {
@@ -90,8 +160,100 @@ export default class BinarySearchTree<E> {
     }
   }
   
+  /**
+   * 根据元素值返回树是否包含该元素
+   * @param element 输入值
+   * @returns 是否包含
+   */
   public container (element: E): boolean {
-    return false
+    return this.getNode(element) !== null
+  }
+
+
+  /**
+   * 根据中序查找值模式，获取该值的前一个值
+   * @param node 当前值
+   * @returns 返回前驱值
+   */
+  public precursor (element: E): E | null {
+    const node =  this.precursorNode(this.getNode(element))
+    return node ? node.element : null
+  }
+
+  /**
+   * 根据中序查找值模式，获取该值的后一个值
+   * @param node 当前值
+   * @returns 返回后继值
+   */
+  public succeeding (element: E): E | null {
+    const node =  this.succeedingNode(this.getNode(element))
+    return node ? node.element : null
+  }
+
+  /**
+   * 根据中序查找节点模式，获取该节点的前一个节点
+   * @param node 当前节点
+   * @returns 返回前驱节点
+   */
+  private precursorNode (node: nodeOfnull<E>): nodeOfnull<E> {
+    if (node === null) return null
+
+    // left 节点不为空，那么查找 left 节点下的所有 right 节点
+    if (node.left !== null) {
+      let cNode = node.left
+      while(cNode.right !== null) {
+        cNode = cNode.right
+      }
+      return cNode
+    }
+
+    let cNode = node.parent
+    if (cNode !== null) {
+      // left 节点为空，但是父节点不为空，并且在父节点的rigth的上，那么返回父节点即可
+      if (cNode.right === node) return cNode
+
+      // left 节点为空，但是父节点不为空，并且在父节点的left的上，那么查找父节点的父节点一直到祖父节点的右节点
+      while(cNode !== null) {
+        if (cNode.parent === null) return null
+        if (cNode.parent.right === cNode) return cNode.parent
+        cNode = cNode.parent
+      }
+    }
+    // left 节点为空，父节点为空，那就是说明当前及时 root节点，返回null即可
+    return null
+  }
+
+  /**
+   * 根据中序查找节点模式，获取该节点的后一个节点
+   * @param node 当前节点
+   * @returns 返回后继节点
+   */
+  private succeedingNode (node: nodeOfnull<E>): nodeOfnull<E> {
+    if (node === null) return null
+
+    // right 节点不为空，那么查找 right 节点下的所有 left 节点
+    if (node.right !== null) {
+      let cNode = node.right
+      while(cNode.left !== null) {
+        cNode = cNode.left
+      }
+      return cNode
+    }
+
+    let cNode = node.parent
+    if (cNode !== null) {
+      // rigth 节点为空，但是父节点不为空，并且在父节点的left的上，那么返回父节点即可
+      if (cNode.left === node) return cNode
+
+      // right 节点为空，但是父节点不为空，并且在父节点的right的上，那么查找父节点的父节点一直到祖父节点的左节点
+      while(cNode !== null) {
+        if (cNode.parent === null) return null
+        if (cNode.parent.left === cNode) return cNode.parent
+        cNode = cNode.parent
+      }
+    }
+    // left 节点为空，父节点为空，那就是说明当前及时 root节点，返回null即可
+    return null
   }
 
   /**
@@ -128,6 +290,26 @@ export default class BinarySearchTree<E> {
     this._inorder(node.right, callback)
   }
   
+
+  /**
+   * 私有方法，根据元素查找对应节点
+   * @param element 查找元素值
+   * @returns 对应节点
+   */
+   private getNode (element: E): nodeOfnull<E> {
+    if (this.root === null) return null
+    let node: nodeOfnull<E> = this.root
+    while(node !== null) {
+      const result = this.compare(element, node.element)
+      if (result === 0) return node
+      if (result > 0) {
+        node = node.right
+      } else {
+        node = node.left
+      }
+    }
+    return null
+  }
 
   /**
    * 后续遍历
