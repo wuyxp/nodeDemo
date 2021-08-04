@@ -19,12 +19,34 @@
  * }
  */
 
+function router (node) {
+  if (node === null) return null
+  if (node.left === null && node.right === null) return node
+  router(node.left)
+
+  let left = node.left
+  let right = node.right
+
+  if (left === null && right !== null) {
+    
+  } else if (left !== null && right === null) {
+    node.right = left 
+    node.left = null
+  } else {
+    node.right = left
+    node.left = null
+    while(node.right !== null) {
+      node = node.right
+    }
+    node.right = right
+  }
+  router(node.right)
+}
 /**
  Do not return anything, modify root in-place instead.
  */
 function flatten(root: TreeNode | null): void {
-  if (root === null) return 
-  let node = root
+  router(root)
 };
 // @lc code=end
 

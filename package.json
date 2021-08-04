@@ -7,7 +7,9 @@
     "test:tree": "jest /tree/",
     "watch:tree": "jest /tree/ --watch",
     "test:list": "jest /list/",
-    "watch:list": "jest /list/ --watch"
+    "watch:list": "jest /list/ --watch",
+    "test:heap": "jest /heap/",
+    "watch:heap": "jest /heap/ --watch"
   },
   "repository": {
     "type": "git",
