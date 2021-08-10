@@ -1,4 +1,4 @@
-import {getB, fib, fibA} from '../src/Fibonacci-getBolb'
+import {getB, fib, fibA} from '../src/算法/练习题/Fibonacci-getBolb'
 test("通项公式 斐波那契数列 ", () => {
   // expect(fib(1)).toBe(1)
   // expect(fib(2)).toBe(1)
