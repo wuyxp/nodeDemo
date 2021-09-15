@@ -21,3 +21,7 @@ export const compare: <T>(ele1:T, ele2:T) => number = (ele1, ele2) => {
   //TODO 比较方法待完善
   return ele1 > ele2 ? 1 : ele1 === ele2 ? 0 : -1
 }
+
+export const rendomIndex = (begin:number, end:number): number => {
+  return Math.floor(Math.random() * ( end - begin )) + begin
+}

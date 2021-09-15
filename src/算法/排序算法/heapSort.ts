@@ -142,10 +142,6 @@
     }
     this._array[index] = element
   }
-
-  getArray(): T[] {
-    return this._array
-  }
   toString () {
     const s = []
     for (let i = 0; i < this._size; i++) {
@@ -158,11 +154,11 @@
 
  // 无优化版本
  export function heapSort<T>(arr: T[]): T[] {
-   const result = HeapBase.form<T>(arr)
-   const newArr = result.getArray()
-   while(!result.isEmpty()) {
-     swap(newArr, 0, result.size())
-   }
+  const result = HeapBase.form<T>(arr)
+  const newArr = Array(arr.length)
+  for (let i = arr.length - 1; i >= 0 ; i--) {
+    newArr[i] = result.remove() as unknown as T
+  }
    return newArr
  }
  

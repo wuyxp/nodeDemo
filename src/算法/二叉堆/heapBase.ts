@@ -143,7 +143,7 @@ class HeapBase<T> implements HeapInterface<T> {
     }
     return s.toString()
   }
-
+ 
 }
 
 export default HeapBase
