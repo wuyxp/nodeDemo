@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" name="test" id="text">
+</body>
+<script>
+  let nextUintOfwork = null
+
+  function performUnitOfWork(workInProgress) {
+    console.log(`当前执行的第 ${workInProgress++} 个任务`);
+    return workInProgress
+  }
+  function workLoop() {
+    // while (nextUintOfwork) {
+    //   nextUintOfwork = performUnitOfWork(nextUintOfwork)
+    // }
+    nextUintOfwork = performUnitOfWork(nextUintOfwork)
+    if (nextUintOfwork) {
+      // setTimeout(workLoop, 0)
+      // requestAnimationFrame(workLoop)
+      // requestIdleCallback(workLoop)
+
+
+      // queueMicrotask(workLoop)
+      // Promise.resolve().then(workLoop)
+    } else {
+      console.log('任务执行完成');
+    }
+  }
+
+  nextUintOfwork = 1
+
+  workLoop()
+  
+</script>
+</html>

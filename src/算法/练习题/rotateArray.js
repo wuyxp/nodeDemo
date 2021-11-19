@@ -40,5 +40,5 @@ while(result.length <= length-1){
 console.log('打印出来的数列');
 console.log(result);
 
-export default const addone = num => num+1;
+// export default const addone = num => num+1;
 
