@@ -8,7 +8,7 @@
  function arrangement (arr, res, length) {
   const len = arr.length
   if (len < 1) {
-    let last = res[res.length-1]
+    let last = res[res.length-1];
     if (length > last.length) {
       res[res.length-1] = res[res.length-2].slice(0, length - last.length) + last
     }
@@ -40,6 +40,6 @@
 //  console.log(getArrList(['1','2','3']))
 console.log(getArrList('123'))
 console.log('================================')
-console.log(getArrList(['1','2','3', '4'])) 
+console.log(getArrList(['1','2','3', '4']))
 //  console.log(getArrList(['1','2','3', '4', '5']))
 //  console.log(getArrList(Array.from({length: 10}).map((i,index) => '' + index)))
